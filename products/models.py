@@ -1,5 +1,11 @@
 from django.db import models
 
+#функция для указания подпапок для фото товара
+def product_photo_dir(instance, filename):
+	# MEDIA_ROOT/
+	# product_photos/_ID_/_FILENAME
+	return 'product_photos/'+instance.id + '/' + filename
+
 class Product(models.Model):
 	"""Модель товаров в магазине"""
 	SPORT = 'sport'
@@ -20,6 +26,7 @@ class Product(models.Model):
 	count = models.IntegerField(verbose_name="Количество", default=0)
 	featured_product = models.BooleanField(default=False, verbose_name="Продвигать товар")
 	category = models.CharField(max_length=5, choices=CATEGORIES, default=PHONE, verbose_name="Категория")
+	photo = models.ImageField(upload_to='product_photos', default='default.jpg')
 
 	def __str__(self):
 		return f"{self.name} - {self.category}"
