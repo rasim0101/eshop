@@ -7,7 +7,7 @@
 {% block content %}
 	<form action="" enctype="multipart/form-data" method="POST">
 		{% csrf_token %}
-		{{ form }}
+		{{ form.as_p }}
 		<button type="submit">Сохранить</button>
 	</form>
 {% endblock content %}
